@@ -19,7 +19,7 @@ let store= new TweetStore(username);
 //scraper.getRecentTweets();
 
 
-store.getTweetsFromCollection(10,10).then(docs => {
+store.getTweetsFromCollection(15,10).then(docs => {
     docs.forEach(tweet => {
         console.log(JSON.stringify(tweet.text));
     })
