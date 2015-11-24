@@ -9,13 +9,6 @@
   "author": "wathmal",
   "license": "ISC",
   "dependencies": {
-    "bootstrap": "^3.3.5",
-    "express": "^4.13.3",
-    "falcor": "^0.1.14",
-    "falcor-express": "^0.1.2",
-    "falcor-router": "^0.2.11",
-    "lodash": "^3.10.1",
-    "mongoose": "^4.2.3",
-    "promise": "^7.0.4"
+  	"promise": "^7.0.4"
   }
 }
