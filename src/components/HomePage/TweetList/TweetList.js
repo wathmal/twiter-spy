@@ -5,6 +5,7 @@
 import React, { PropTypes, Component } from 'react';
 import withStyles from '../../../decorators/withStyles';
 import Tweet from './Tweet/Tweet';
+import Pager from './Pager/Pager';
 
 class TweetList extends Component {
   static propTypes = {
@@ -21,11 +22,12 @@ class TweetList extends Component {
       Tweets.push(<Tweet {...tweet} />);
     });
 
-    return(
+    return (
       <div className="col-md-6 col-md-offset-3">
         <ul className="list-group">
           {Tweets}
         </ul>
+        <Pager />
       </div>
     );
   }

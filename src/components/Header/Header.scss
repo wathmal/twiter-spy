@@ -3,6 +3,7 @@
 @import '../variables.scss';
 
 $brand-color: #61dafb;
+/*
 
 .Header {
   background: #373277;
@@ -18,7 +19,7 @@ $brand-color: #61dafb;
 .Header-brand {
   color: color($brand-color lightness(+10%));
   text-decoration: none;
-  font-size: 1.75em; /* ~28px */
+  font-size: 1.75em; !* ~28px *!
 }
 
 .Header-brandTxt {
@@ -48,3 +49,6 @@ $brand-color: #61dafb;
   font-size: 1.25em;
   margin: 0;
 }
+*/
+
+.Header {}

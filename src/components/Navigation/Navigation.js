@@ -15,14 +15,39 @@ class Navigation extends Component {
 
   render() {
     return (
-      <div className={classNames(this.props.className, 'Navigation')} role="navigation">
-        <a className="Navigation-link" href="/about" onClick={Link.handleClick}>About</a>
-        <a className="Navigation-link" href="/contact" onClick={Link.handleClick}>Contact</a>
-        <span className="Navigation-spacer"> | </span>
-        <a className="Navigation-link" href="/login" onClick={Link.handleClick}>Log in</a>
-        <span className="Navigation-spacer">or</span>
-        <a className="Navigation-link Navigation-link--highlight" href="/register" onClick={Link.handleClick}>Sign up</a>
-      </div>
+      <nav className="navbar navbar-default navbar-fixed-top">
+        <div className="container-fluid">
+
+          <div className="navbar-header">
+            <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span className="sr-only">toggle navigation</span>
+              <span className="icon-bar"></span>
+              <span className="icon-bar"></span>
+              <span className="icon-bar"></span>
+            </button>
+            <a className="navbar-brand" href="#">
+              <img className="img img-responsive Navigation-brandImage" src={require('./brand.png')} />
+            </a>
+          </div>
+
+          <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul className="nav navbar-nav">
+              <li className="active"><a href="#">dashboard<span className="sr-only">(current)</span></a></li>
+              <li><a href="#">stats</a></li>
+            </ul>
+
+            <ul className="nav navbar-nav navbar-right">
+              <form className="navbar-form navbar-left" role="search">
+                <div className="form-group">
+                  <input type="text" className="form-control" placeholder="search" />
+                </div>
+                <button type="submit" className="btn btn-default">submit</button>
+              </form>
+              <li><a href="#">source</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
     );
   }
 
