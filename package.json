@@ -7,6 +7,7 @@
   "dependencies": {
     "babel-core": "5.8.33",
     "bluebird": "3.0.5",
+    "bootstrap": "^3.3.6",
     "classnames": "2.2.0",
     "eventemitter3": "1.1.1",
     "express": "4.13.3",
@@ -16,6 +17,7 @@
     "front-matter": "2.0.0",
     "history": "1.13.1",
     "jade": "1.11.0",
+    "jquery": "^2.1.4",
     "normalize.css": "3.0.3",
     "react": "0.14.2",
     "react-dom": "0.14.2",

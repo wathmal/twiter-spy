@@ -1,6 +1,6 @@
 ## React Starter Kit — "isomorphic" web app boilerplate
 
-[![Support us on Bountysource](https://dl.dropboxusercontent.com/u/16006521/react-starter-kit/banner.png)](https://salt.bountysource.com/teams/react-starter-kit)<br>
+status: ![build status](http://wathmal.me:8080/job/twitter-spy%20ci/badge/icon)
 
 > [React Starter Kit](http://www.reactstarterkit.com) is an opinionated
 > boilerplate for web development built on top of Facebook's
