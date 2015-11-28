@@ -1,6 +1,6 @@
 ## React Starter Kit — "isomorphic" web app boilerplate
 
-status: ![build status](http://wathmal.me:8080/job/twitter-spy%20ci/badge/icon)
+![build status](http://wathmal.me:8080/job/twitter-spy%20ci/badge/icon)
 
 > [React Starter Kit](http://www.reactstarterkit.com) is an opinionated
 > boilerplate for web development built on top of Facebook's
