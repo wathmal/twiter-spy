@@ -9,7 +9,7 @@
     "bluebird": "3.0.5",
     "bootstrap": "^3.3.6",
     "classnames": "2.2.0",
-    "eventemitter3": "1.1.1",
+    "eventemitter3": "^1.1.1",
     "express": "4.13.3",
     "fastclick": "1.0.6",
     "fbjs": "0.4.0",

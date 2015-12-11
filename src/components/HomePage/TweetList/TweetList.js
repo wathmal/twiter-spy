@@ -9,7 +9,7 @@ import Pager from './Pager/Pager';
 
 class TweetList extends Component {
   static propTypes = {
-    tweets: PropTypes.array,
+    tweets: PropTypes.object,
   };
 
   constructor() {
@@ -18,16 +18,21 @@ class TweetList extends Component {
 
   render() {
     const Tweets = [];
-    this.props.tweets.forEach(tweet => {
+/*    this.props.tweets.forEach(tweet => {
       Tweets.push(<Tweet {...tweet} />);
-    });
+    });*/
+    for (let key in this.props.tweets) {
+      // console.log(this.props.tweets[key].tweet);
+      Tweets.push(<Tweet {...this.props.tweets[key].tweet} />);
+
+    }
 
     return (
-      <div className="col-md-6 col-md-offset-3">
+      <div className="col-md-6 col-md-offset-6">
+        <Pager />
         <ul className="list-group">
           {Tweets}
         </ul>
-        <Pager />
       </div>
     );
   }

@@ -1,32 +1,49 @@
 import React, { PropTypes, Component } from 'react';
 import withStyles from '../../../../decorators/withStyles';
+import style from './Tweet.scss';
 
+@withStyles(style)
 class Tweet extends Component {
 
   static propTypes = {
-    screenname: PropTypes.string,
-    text: PropTypes.string,
-    image: PropTypes.string,
   };
 
   constructor() {
     super();
+    twemoji.size = '36x36';
+  }
+
+  parseEmoji(text){
+    const emojify= twemoji.parse(text);
+    return twemoji.parse(text);
   }
 
   render() {
+    // console.log(this.props.hasOwnProperty('retweeted_status'));
+    let body;
+    if (this.props.hasOwnProperty('retweeted_status')) {
+      body = <Tweet {...this.props.retweeted_status} />;
+    }
+    else {
+      body = <p dangerouslySetInnerHTML={{__html: this.parseEmoji(this.props.text)}}></p>;
+
+    }
+
     return (
       <div className="list-group-item">
-        <li className="media">
-          <div className="media-left">
+        <div className="media">
+          <div className="media-left media-top">
             <a href="#">
-              <img className="media-object" width="64" src= {this.props.image} alt={this.props.screenname} />
+              <img className="media-object  img-rounded" src= {this.props.user.profile_image_url} alt={this.props.user.screen_name} />
             </a>
           </div>
           <div className="media-body">
-            <h4 className="media-heading">{this.props.screenname}</h4>
-            {this.props.text}
+            <div className="media-heading">
+              <h6>{'@'+this.props.user.screen_name}</h6>
+            </div>
+            {body}
           </div>
-        </li>
+        </div>
       </div>
     );
   }

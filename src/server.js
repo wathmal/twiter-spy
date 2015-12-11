@@ -13,6 +13,13 @@ const server = global.server = express();
 const port = process.env.PORT || 5000;
 server.set('port', port);
 
+
+import FalcorExpress from 'falcor-express';
+import FalcorRouter from './backend/routes/FalcorRouter';
+
+const falcorRouter = new FalcorRouter();
+
+
 //
 // Register Node.js middleware
 // -----------------------------------------------------------------------------
@@ -23,6 +30,11 @@ server.use(express.static(path.join(__dirname, 'public')));
 // -----------------------------------------------------------------------------
 server.use('/api/content', require('./api/content'));
 
+
+server.use('/model.json', FalcorExpress.dataSourceRoute(function(req, res) {
+  // return new FalcorRouter();
+  return falcorRouter;
+}));
 //
 // Register server-side rendering middleware
 // -----------------------------------------------------------------------------
