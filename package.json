@@ -52,6 +52,7 @@
     "jest-cli": "^0.7.1",
     "jscs": "^2.5.0",
     "lodash.merge": "^3.3.2",
+    "mongoose": "^4.2.6",
     "mkdirp": "^0.5.1",
     "ncp": "^2.0.0",
     "postcss": "^5.0.10",
