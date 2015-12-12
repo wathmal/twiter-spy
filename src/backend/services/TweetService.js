@@ -11,8 +11,8 @@ class TweetService {
     // console.log(tweetModel(username));
     this.tweetModel = tweetModel(mongoose, username);
     try {
-      // mongoose.connect('mongodb://localhost/twitter');
-      mongoose.connect('mongodb://wathmal:wadamala@ds059804.mongolab.com:59804/apeksha');
+      mongoose.connect('mongodb://localhost/twitter');
+      // mongoose.connect('mongodb://wathmal:wadamala@ds059804.mongolab.com:59804/apeksha');
     } catch (e) {
       console.log(e);
     }
