@@ -8,13 +8,24 @@ import EventEmitter from 'eventemitter3';
 
 const CHANGE_TEXT = 'change';
 
-let _recentTweets = {};
-
+let _filteredTweets = [];
+let _searchText= '';
+let _fromDate = null;
+let _toDate= null;
+let _pageNo = 0;
 /*
  * imagine these as setters for store only accessible by the store
  * */
 function loadTweets(data) {
-  _recentTweets = data;
+  _filteredTweets = data;
+}
+
+function setSearchText(text) {
+  _searchText = text;
+}
+
+function setPageNo(no) {
+  _pageNo = no;
 }
 
 class TweetStore extends EventEmitter {
@@ -24,8 +35,16 @@ class TweetStore extends EventEmitter {
     super();
   }
 
-  getRecentTweets() {
-    return _recentTweets;
+  getFilteredTweets() {
+    return _filteredTweets;
+  }
+
+  getSearchText() {
+    return _searchText;
+  }
+
+  getPageNo() {
+    return _pageNo;
   }
 
   emitChange() {
@@ -47,6 +66,22 @@ tweetStore.dispatchToken = AppDispatcher.register(function(payload) {
 
   case AppConstants.RECEIVE_TWEETS:
     loadTweets(action.data);
+    tweetStore.emitChange();
+    break;
+/*
+  case AppConstants.RECEIVE_SEARCHED_TWEETS:
+    loadSearchedTweets(action.data);
+    // console.log(action.data);
+    tweetStore.emitChange();
+    break;*/
+
+  case AppConstants.SET_SEARCH_TEXT:
+    setSearchText(action.data);
+    tweetStore.emitChange();
+    break;
+
+  case AppConstants.SET_PAGE_NO:
+    setPageNo(action.data);
     tweetStore.emitChange();
     break;
 

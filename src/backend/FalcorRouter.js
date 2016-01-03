@@ -4,10 +4,10 @@
 
 import JsonGraph from 'falcor-json-graph';
 import Router from 'falcor-router';
-import TweetService from './../services/TweetService';
+import TweetService from './services/TweetService';
 const $atom = JsonGraph.atom;
 
-const username = 'BApikz';
+const username = 'wathmal';
 
 class FalcorRouter extends
   Router.createClass([
@@ -33,15 +33,16 @@ class FalcorRouter extends
 
     {
       // route: 'tweets[{integers:indices}]["text", "screen_name", "image", "created_at", "in_reply_to_status_id"]',
-      route: 'search[{integers:indices}]["tweet"]',
+      route: 'search[{integers:indices}][{keys}]',
       get: function(pathSet) {
         // console.log(pathSet);
 
         const index = pathSet[1];
-        return this.tweetService.searchTweets('wathmal', index[0], index[index.length - 1]).then(
+        const query = pathSet[2][0];
+        return this.tweetService.searchTweets(query, index[0], index[index.length - 1]).then(
           tweets => {
             return pathSet.indices.map(tweetindex => {
-              return {path: ['search', tweetindex, 'tweet'], value: $atom(tweets[tweetindex - 1])};
+              return {path: ['search', tweetindex, query], value: $atom(tweets[tweetindex - 1])};
             });
           }
         );

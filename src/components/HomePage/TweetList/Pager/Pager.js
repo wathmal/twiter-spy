@@ -8,35 +8,32 @@ import HomePageActionCreators from './../../../../actions/HomePageActionCreators
 class Pager extends Component {
 
   constructor() {
-    super();
+    super();/*
     this.page = 0;
     this.handleNextButton = this.handleNextButton.bind(this);
-    this.handlePrevButton = this.handlePrevButton.bind(this);
+    this.handlePrevButton = this.handlePrevButton.bind(this);*/
   }
 
-  componentDidMount() {
-    HomePageActionCreators.receiveStatistics(this.page);
+  c/*omponentDidMount() {
+    HomePageActionCreators.receiveTweets(this.page);
   }
 
   handleNextButton(e) {
     e.preventDefault();
     if (this.page - 1 >= 0) {
-      HomePageActionCreators.receiveStatistics(--this.page);
+      HomePageActionCreators.receiveTweets(--this.page);
     }
   }
 
   handlePrevButton(e) {
     e.preventDefault();
-    HomePageActionCreators.receiveStatistics(++this.page);
-  }
+    HomePageActionCreators.receiveTweets(++this.page);
+  }*/
   render() {
     return (
-      <nav>
-        <ul className="pager">
-          <li className="previous"><a onClick={this.handlePrevButton} href="#"><span aria-hidden="true">&larr;</span> older</a></li>
-          <li className="next"><a onClick={this.handleNextButton} href="#">newer <span aria-hidden="true">&rarr;</span></a></li>
-        </ul>
-      </nav>
+      <div>
+
+      </div>
     );
   }
 }

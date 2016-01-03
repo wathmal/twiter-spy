@@ -1,6 +1,8 @@
 import React, { PropTypes, Component } from 'react';
 import withStyles from '../../../../decorators/withStyles';
 import style from './Tweet.scss';
+import twitter from 'twitter-text';
+
 
 @withStyles(style)
 class Tweet extends Component {
@@ -14,8 +16,9 @@ class Tweet extends Component {
   }
 
   parseEmoji(text){
-    const emojify= twemoji.parse(text);
-    return twemoji.parse(text);
+    let twitterText = twitter.autoLink(text);
+
+    return twemoji.parse(twitterText);
   }
 
   render() {

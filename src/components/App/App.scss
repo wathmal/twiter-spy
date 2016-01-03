@@ -1,5 +1,4 @@
 @import '../../../node_modules/normalize.css/normalize.css';
-
 /*! React Starter Kit | MIT License | http://www.reactstarterkit.com/ */
 
 @import '../variables.scss';
@@ -8,21 +7,76 @@
  * Base styles
  * ========================================================================== */
 
-html {
-  color: #222;
-  font-weight: 100;
-  font-size: 1em; /* ~16px; */
-  font-family: $font-family-base;
-  line-height: 1.375; /* ~22px */
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: url(//fonts.gstatic.com/ea/notosanssinhala/v1/NotoSansSinhala-Regular.eot);
+  src: url(//fonts.gstatic.com/ea/notosanssinhala/v1/NotoSansSinhala-Regular.eot?#iefix) format('embedded-opentype'),
+  url(//fonts.gstatic.com/ea/notosanssinhala/v1/NotoSansSinhala-Regular.woff2) format('woff2'),
+  url(//fonts.gstatic.com/ea/notosanssinhala/v1/NotoSansSinhala-Regular.woff) format('woff'),
+  url(//fonts.gstatic.com/ea/notosanssinhala/v1/NotoSansSinhala-Regular.ttf) format('truetype');
+  unicode-range: U+0D80-0DFF;
 }
 
 /*
+this is actually 700 font weight
+*/
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  src: url(//fonts.gstatic.com/ea/notosanssinhala/v1/NotoSansSinhala-Bold.eot);
+  src: url(//fonts.gstatic.com/ea/notosanssinhala/v1/NotoSansSinhala-Bold.eot?#iefix) format('embedded-opentype'),
+  url(//fonts.gstatic.com/ea/notosanssinhala/v1/NotoSansSinhala-Bold.woff2) format('woff2'),
+  url(//fonts.gstatic.com/ea/notosanssinhala/v1/NotoSansSinhala-Bold.woff) format('woff'),
+  url(//fonts.gstatic.com/ea/notosanssinhala/v1/NotoSansSinhala-Bold.ttf) format('truetype');
+  unicode-range: U+0D80-0DFF;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: url(//fonts.gstatic.com/ea/notosanstamil/v3/NotoSansTamil-Regular.eot);
+  src: url(//fonts.gstatic.com/ea/notosanstamil/v3/NotoSansTamil-Regular.eot?#iefix) format('embedded-opentype'),
+  url(//fonts.gstatic.com/ea/notosanstamil/v3/NotoSansTamil-Regular.woff2) format('woff2'),
+  url(//fonts.gstatic.com/ea/notosanstamil/v3/NotoSansTamil-Regular.woff) format('woff'),
+  url(//fonts.gstatic.com/ea/notosanstamil/v3/NotoSansTamil-Regular.ttf) format('truetype');
+  unicode-range: U+0B80-0BFF;
+
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  src: url(//fonts.gstatic.com/ea/notosanstamil/v3/NotoSansTamil-Bold.eot);
+  src: url(//fonts.gstatic.com/ea/notosanstamil/v3/NotoSansTamil-Bold.eot?#iefix) format('embedded-opentype'),
+  url(//fonts.gstatic.com/ea/notosanstamil/v3/NotoSansTamil-Bold.woff2) format('woff2'),
+  url(//fonts.gstatic.com/ea/notosanstamil/v3/NotoSansTamil-Bold.woff) format('woff'),
+  url(//fonts.gstatic.com/ea/notosanstamil/v3/NotoSansTamil-Bold.ttf) format('truetype');
+  unicode-range: U+0B80-0BFF;
+
+}
+
+/*
+
+html {
+  color: #222;
+  font-weight: 100;
+  font-size: 1em; !* ~16px; *!
+  font-family: $font-family-base;
+  line-height: 1.375; !* ~22px *!
+}
+
+!*
  * Remove text-shadow in selection highlight:
  * https://twitter.com/miketaylr/status/12228805301
  *
  * These selection rule sets have to be separate.
  * Customize the background color to match your design.
- */
+ *!
 
 ::-moz-selection {
   background: #b3d4fc;
@@ -34,9 +88,9 @@ html {
   text-shadow: none;
 }
 
-/*
+!*
  * A better looking default horizontal rule
- */
+ *!
 
 hr {
   display: block;
@@ -47,11 +101,11 @@ hr {
   padding: 0;
 }
 
-/*
+!*
  * Remove the gap between audio, canvas, iframes,
  * images, videos and the bottom of their containers:
  * https://github.com/h5bp/html5-boilerplate/issues/440
- */
+ *!
 
 audio,
 canvas,
@@ -62,9 +116,9 @@ video {
   vertical-align: middle;
 }
 
-/*
+!*
  * Remove default fieldset styles.
- */
+ *!
 
 fieldset {
   border: 0;
@@ -72,17 +126,17 @@ fieldset {
   padding: 0;
 }
 
-/*
+!*
  * Allow only vertical resizing of textareas.
- */
+ *!
 
 textarea {
   resize: vertical;
 }
 
-/*
+!*
  * Browser upgrade prompt
- * ========================================================================== */
+ * ========================================================================== *!
 
 .browserupgrade {
   margin: 0.2em 0;
@@ -91,18 +145,18 @@ textarea {
   padding: 0.2em 0;
 }
 
-/*
+!*
  * Print styles
  * Inlined to avoid the additional HTTP request:
  * http://www.phpied.com/delay-loading-your-print-css/
- * ========================================================================== */
+ * ========================================================================== *!
 
 @media print {
   *,
   *:before,
   *:after {
     background: transparent !important;
-    color: #000 !important; /* Black prints faster: http://www.sanbeiji.com/archives/953 */
+    color: #000 !important; !* Black prints faster: http://www.sanbeiji.com/archives/953 *!
     box-shadow: none !important;
     text-shadow: none !important;
   }
@@ -120,10 +174,10 @@ textarea {
     content: " (" attr(title) ")";
   }
 
-  /*
+  !*
    * Don't show links that are fragment identifiers,
    * or use the `javascript:` pseudo protocol
-   */
+   *!
 
   a[href^="#"]:after,
   a[href^="javascript:"]:after {
@@ -136,10 +190,10 @@ textarea {
     page-break-inside: avoid;
   }
 
-  /*
+  !*
    * Printing Tables:
    * http://css-discuss.incutio.com/wiki/Printing_Tables
-   */
+   *!
 
   thead {
     display: table-header-group;
@@ -166,3 +220,4 @@ textarea {
     page-break-after: avoid;
   }
 }
+*/

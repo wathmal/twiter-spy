@@ -11,10 +11,8 @@ class Header extends Component {
 
   render() {
     return (
-      <div className="Header">
-        <div className="Header-container">
-          <Navigation />
-        </div>
+      <div style={{paddingBottom: '20px'}}>
+        <Navigation />
       </div>
     );
   }

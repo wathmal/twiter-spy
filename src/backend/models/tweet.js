@@ -1,10 +1,14 @@
 /**
  * Created by wathmal on 11/14/15.
  */
+
 import mongoose from 'mongoose';
 
-export default function (mongoose, username){
-  const tweetSchema = mongoose.Schema({
+//export default tweetModel;
+
+export default function (username){
+  const tweetSchema = new mongoose.Schema({
+    _id: Number,
     created_at: Date,
     id: {type: Number, index: { unique: true }},
     id_str: String,
@@ -16,25 +20,35 @@ export default function (mongoose, username){
     in_reply_to_user_id: Number,
     in_reply_to_user_id_str: String,
     in_reply_to_screen_name: String,
-    user: { id: Number, id_str: String },
+    user: {},
     geo: {},
     coordinates: {},
     place: {},
     contributors: {},
-    is_quote_status: {},
+    retweeted_status: {},
+    is_quote_status: Boolean,
     retweet_count: Number,
     favorite_count: Number,
-    entities: { hashtags: [], symbols: [], user_mentions: [], urls: [] },
+    entities: {},
+    extended_entities: {},
     favorited: Boolean,
     retweeted: Boolean,
+    possibly_sensitive: Boolean,
     lang: String
 
   },{ _id: false });
-  tweetSchema.index({ text: 'text'}, { default_language: 'none' });
 
+  tweetSchema.pre('save', function(next) {
+
+    this.created_at = new Date(this.created_at);
+    this._id= this.id;
+    // console.log(this._id);
+    next();
+  })
 
   // username is the collection name
   // use lower case
   const tweetModel = mongoose.model(username.toLowerCase(), tweetSchema);
+  // tweetModel.index({ text: 'text' });
   return tweetModel;
 }

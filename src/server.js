@@ -15,8 +15,10 @@ server.set('port', port);
 
 
 import FalcorExpress from 'falcor-express';
-import FalcorRouter from './backend/routes/FalcorRouter';
+import FalcorRouter from './backend/FalcorRouter';
+import mongoose from 'mongoose';
 
+mongoose.connect('mongodb://localhost/twitter');
 const falcorRouter = new FalcorRouter();
 
 

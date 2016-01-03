@@ -1,34 +1,50 @@
 /**
  * Created by wathmal on 11/14/15.
  */
-import mongoose from 'mongoose';
-import tweetModel from './../models/tweet.model.js';
-import Promise from 'promise';
 
+import mongoose from 'mongoose';
+import tweetModel from '../models/tweet.js';
+import Promise from 'promise';
+import logger from './../utils/logger';
+
+const MONGO_DUP_KEY_ERR_CODE= 11000;
 class TweetService {
 
-  constructor(username) {
-    // console.log(tweetModel(username));
-    this.tweetModel = tweetModel(mongoose, username);
-    try {
-      mongoose.connect('mongodb://localhost/twitter');
-      // mongoose.connect('mongodb://wathmal:wadamala@ds059804.mongolab.com:59804/apeksha');
-    } catch (e) {
-      console.log(e);
-    }
+
+  constructor(username){
+
+    this.tweetModel= new tweetModel(username);
+    this.username = username;
+    // console.log(this.username);
+    // console.log(this.tweetModel);
+    /*try{
+     mongoose.connect('mongodb://localhost/twitter');
+     }
+     catch (e){
+     console.log(e);
+     }*/
   }
 
-  insetInToCollection(tweets) {
+  insetInToCollection(tweets){
     // reverse order the tweets
     // latest the last
-    return new Promise((fulfill, reject) => {
-      this.tweetModel.collection.insert(tweets.reverse(), function (err, docs) {
-        if (err) {
-          console.log(err);
+    // console.log(this.username);
+    return new Promise((fulfill, reject) =>{
+      this.tweetModel.create(tweets, (err, docs) => {
+        if(err){
+          // console.log(err);
           reject(err);
         }
-        else {
-          console.log(`inserted ${docs.ops.length}`);
+        else{
+          // console.log(`inserted ${docs.length}`);
+          //
+          // console.log(tweets);
+          if(docs.constructor === Array){
+            logger.info(`inserted ${docs.length} tweets to @${this.username}`);
+          }
+          else{
+            logger.info(`inserted 1 tweet to @${this.username}`);
+          }
           fulfill(docs);
         }
       })
@@ -38,13 +54,13 @@ class TweetService {
 
   getLastTweetId() {
 
-    return new Promise((fulfill, reject) => {
+    return new Promise( (fulfill, reject) =>{
       this.tweetModel.findOne().sort({id: -1}).exec(function (err, doc) {
         //console.log(doc.id);
-        if (doc != null) {
+        if(doc != null) {
           fulfill(doc.id);
         }
-        else {
+        else{
           // send null, so it knows that no tweets are there
           fulfill(doc);
         }
@@ -54,13 +70,13 @@ class TweetService {
   }
 
   getFirstTweetId() {
-    return new Promise((fulfill, reject) => {
+    return new Promise( (fulfill, reject) =>{
       this.tweetModel.findOne().sort({id: 1}).exec(function (err, doc) {
         //console.log(doc.id);
-        if (doc != null) {
+        if(doc != null) {
           fulfill(doc.id);
         }
-        else {
+        else{
           // send null, so it knows that no tweets are there
           fulfill(doc);
         }
@@ -70,10 +86,9 @@ class TweetService {
 
   getTweetsFromCollection(from, to) {
     return new Promise( (fulfill, reject) => {
-      this.tweetModel.find({}, {_id: 0}).sort({id: -1}).skip(from).limit(to).exec(function (err, docs) {
+      this.tweetModel.find({},{_id: 0}).sort({id: -1}).skip(from).limit(to).exec(function (err, docs) {
 
         if(docs != null) {
-          // console.log(docs);
           fulfill(docs);
         }
         else{
@@ -85,12 +100,11 @@ class TweetService {
     })
   }
 
-  searchTweets(query, from, to){
+  searchTweets(query, from, to) {
     return new Promise( (fulfill, reject) => {
-      this.tweetModel.find({ $text: { $search: query } }, {_id: 0}).sort({id: -1}).skip(from).limit(to).exec(function (err, docs) {
+      this.tweetModel.find({'$text':{'$search':query}},{_id: 0}).sort({id: -1}).skip(from).limit(to).exec(function (err, docs) {
 
         if(docs != null) {
-          // console.log(docs);
           fulfill(docs);
         }
         else{
@@ -99,7 +113,7 @@ class TweetService {
           reject(err);
         }
       });
-    });
+    })
   }
 
 
