@@ -41,6 +41,7 @@ class TweetList extends Component {
 
     console.log(TweetStore.getSearchText());
     console.log(TweetStore.getPageNo());
+
   }
 
   render() {

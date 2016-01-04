@@ -31,12 +31,18 @@ class Navigation extends Component {
 
   };
 
+
+
   constructor(){
     super();
-    this.handleSearch =  this.handleSearch.bind(this);
+    this.state = {selectedSearchType: 1, fromDateOpen: false};
+    this.handleSearchButton =  this.handleSearchButton.bind(this);
+    this.handleFromButton = this.handleFromButton.bind(this);
+    this.handleToButton = this.handleToButton.bind(this);
+    this.handleDropdown = this.handleDropdown.bind(this);
   }
 
-  handleSearch(e){
+  handleSearchButton(e){
     e.preventDefault();
     // var input= React.findDOMNode(this.refs.searchInput).value;
     let input = this.refs.searchInput.getValue();
@@ -46,6 +52,35 @@ class Navigation extends Component {
     }
   }
 
+  handleDropdown(e, index, value){
+    e.preventDefault();
+    this.setState({selectedSearchType: value});
+    console.log(index);
+
+    HomePageActionCreators.setFromDate(null);
+    HomePageActionCreators.setToDate(null);
+
+  }
+
+  handleFromButton(e){
+    e.preventDefault();
+    this.refs.dateFrom.openDialog();
+  }
+
+  handleFromDatePicker(e, date){
+    console.log(date);
+    HomePageActionCreators.setFromDate(date);
+  }
+
+  handleToButton(e){
+    e.preventDefault();
+    this.refs.dateTo.openDialog();
+  }
+
+  handleToDatePicker(e, date){
+    console.log(date);
+    HomePageActionCreators.setToDate(date);
+  }
 
 
   render() {
@@ -59,7 +94,7 @@ class Navigation extends Component {
 
 
         <ToolbarGroup float="right">
-          <RaisedButton label="search tweets" secondary={true} onTouchTap={this.handleSearch} />
+          <RaisedButton label="search tweets" secondary={true} onTouchTap={this.handleSearchButton} />
 
 
         </ToolbarGroup>
@@ -69,13 +104,17 @@ class Navigation extends Component {
 
         <ToolbarGroup float="right">
 
-          <RaisedButton label="from" disabled={false} />
-          <DropDownMenu value={1}>
+
+          <DropDownMenu value={this.state.selectedSearchType} onChange={this.handleDropdown}>
             <MenuItem value={1} primaryText="search all" />
             <MenuItem value={2} primaryText="on specific date" />
             <MenuItem value={3} primaryText="on date range" />
           </DropDownMenu>
-          <RaisedButton label="to" disabled={true} />
+          <DatePicker ref="dateFrom" style={{display: 'none'}} onChange={this.handleFromDatePicker} />
+          <RaisedButton label="from" disabled={!(this.state.selectedSearchType >= 2)} onTouchTap={this.handleFromButton} />
+
+          <DatePicker ref="dateTo" style={{display: 'none'}} onChange={this.handleToDatePicker} />
+          <RaisedButton label="to" disabled={!(this.state.selectedSearchType == 3)} onTouchTap={this.handleToButton} />
 
 
 

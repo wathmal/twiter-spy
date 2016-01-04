@@ -28,6 +28,14 @@ function setPageNo(no) {
   _pageNo = no;
 }
 
+function setFromDate(date) {
+  _fromDate = date;
+}
+
+function setToDate(date) {
+  _toDate = date;
+}
+
 class TweetStore extends EventEmitter {
 
 
@@ -45,6 +53,14 @@ class TweetStore extends EventEmitter {
 
   getPageNo() {
     return _pageNo;
+  }
+
+  getFromDate() {
+    return _fromDate;
+  }
+
+  getToDate() {
+    return _toDate;
   }
 
   emitChange() {
@@ -85,6 +101,15 @@ tweetStore.dispatchToken = AppDispatcher.register(function(payload) {
     tweetStore.emitChange();
     break;
 
+  case AppConstants.SET_FROM_DATE:
+    setFromDate(action.data);
+    tweetStore.emitChange();
+    break;
+
+  case AppConstants.SET_TO_DATE:
+    setToDate(action.data);
+    tweetStore.emitChange();
+    break;
   default:
     return true;
   }

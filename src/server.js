@@ -26,7 +26,12 @@ const falcorRouter = new FalcorRouter();
 // Register Node.js middleware
 // -----------------------------------------------------------------------------
 server.use(express.static(path.join(__dirname, 'public')));
-
+server.use(function(req, res, next) {
+  GLOBAL.navigator = {
+    userAgent: req.headers['user-agent']
+  }
+  next();
+});
 //
 // Register API middleware
 // -----------------------------------------------------------------------------

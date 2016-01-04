@@ -3,6 +3,8 @@
  */
 import AppDispatcher from '../core/Dispatcher';
 import AppConstants from '../constants/ActionTypes';
+import ESQueryBuilder from './../api/ESQueryBuilder';
+
 import Falcor from 'falcor';
 import FalcorDataSource from 'falcor-http-datasource';
 const elasticsearch = require('elasticsearch');
@@ -26,18 +28,9 @@ class HomePageActionCreators {
 
     const from = 0 + page * MAX_TWEETS_PER_PAGE;
     const to = 9 + page * MAX_TWEETS_PER_PAGE;
-    client.search({
-      index: 'twitter',
-      type: 'wathmals',
-      from: from,
-      size: MAX_TWEETS_PER_PAGE,
-      body: {
-        query: {
-          match_all: {}
-        },
-        "sort": {"id": {"order": "desc"}}
-      }
-    }).then(function (resp) {
+    client.search(
+      ESQueryBuilder.getRangeSearchQuery()
+    ).then(function (resp) {
       var hits = resp.hits.hits;
       AppDispatcher.handleAction({
         actionType: AppConstants.RECEIVE_TWEETS,
@@ -72,18 +65,22 @@ class HomePageActionCreators {
       data: page,
     });
 
-    client.search({
-      index: 'twitter',
-      type: 'wathmals',
-      from: from,
-      size: MAX_TWEETS_PER_PAGE,
-      body: {
-        query: {
-          match: {text: query}
-        },
-        "sort": {"id": {"order": "desc"}}
-      }
-    }).then(function (resp) {
+    /*{
+     index: 'twitter',
+     type: 'wathmals',
+     from: from,
+     size: MAX_TWEETS_PER_PAGE,
+     body: {
+     query: {
+     match: {text: query}
+     },
+     "sort": {"id": {"order": "desc"}}
+     }
+     }
+    * */
+    client.search(
+      ESQueryBuilder.getRangeSearchQuery()
+    ).then(function (resp) {
       var hits = resp.hits.hits;
       AppDispatcher.handleAction({
         actionType: AppConstants.RECEIVE_TWEETS,
@@ -94,7 +91,25 @@ class HomePageActionCreators {
     });
   }
 
+  static setFromDate(date){
+    AppDispatcher.handleAction({
+      actionType: AppConstants.SET_FROM_DATE,
+      data: date,
+    });
+  }
 
+  static setToDate(date){
+    AppDispatcher.handleAction({
+      actionType: AppConstants.SET_TO_DATE,
+      data: date,
+    });
+  }
 
+  static setPageNo(page){
+    AppDispatcher.handleAction({
+      actionType: AppConstants.SET_PAGE_NO,
+      data: page,
+    });
+  }
 }
 export default HomePageActionCreators;
