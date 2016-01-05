@@ -31,8 +31,8 @@ class ESQueryBuilder {
      }
     * */
     let esquery = {};
-    esquery["index"] = "twitter";
-    esquery["type"] = "wathmals";
+    esquery["index"] = "estwitter";
+    esquery["type"] = "billgates";
     esquery["from"] = from;
     esquery["size"] = MAX_TWEETS_PER_PAGE;
 
@@ -54,7 +54,7 @@ class ESQueryBuilder {
 
     }
 
-    esquery["body"]["sort"] = {"id": {"order": "desc"}};
+    esquery["body"]["sort"] = {"_id": {"order": "desc"}};
     if(searchText !== '') {
       esquery["body"]["highlight"] = {"fields": {"text": {}}};
     }
