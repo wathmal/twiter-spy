@@ -31,10 +31,19 @@ class HomePageActionCreators {
     client.search(
       ESQueryBuilder.getRangeSearchQuery()
     ).then(function (resp) {
+      /*console.log('total tweets : '+ resp.hits.total);
+      console.log('total statuses : '+ resp.aggregations.status_count.doc_count);
+      console.log('total replies : '+ resp.aggregations.reply_count.doc_count);
+      console.log('total retweets : '+ resp.aggregations.retweet_count.doc_count);*/
       var hits = resp.hits.hits;
       AppDispatcher.handleAction({
         actionType: AppConstants.RECEIVE_TWEETS,
         data: hits,
+      });
+      AppDispatcher.handleAction({
+        actionType: AppConstants.TWEET_STATS,
+        stat_data: resp.aggregations,
+        total_data: resp.hits.total,
       });
     }, function (err) {
       console.trace(err.message);
@@ -85,6 +94,11 @@ class HomePageActionCreators {
       AppDispatcher.handleAction({
         actionType: AppConstants.RECEIVE_TWEETS,
         data: hits,
+      });
+      AppDispatcher.handleAction({
+        actionType: AppConstants.TWEET_STATS,
+        stat_data: resp.aggregations,
+        total_data: resp.hits.total,
       });
     }, function (err) {
       console.trace(err.message);

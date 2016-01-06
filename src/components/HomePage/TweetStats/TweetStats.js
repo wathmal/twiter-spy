@@ -14,7 +14,12 @@ const PieChart = require("react-chartjs").Pie;
 
 class TweetStats extends Component {
 
-    static propTypes = {};
+    static propTypes = {
+      totalTweets : PropTypes.number,
+      totalStatuses : PropTypes.number,
+      totalReplies : PropTypes.number,
+      totalRetweets : PropTypes.number,
+    };
 
     constructor() {
         super();
@@ -23,19 +28,19 @@ class TweetStats extends Component {
     render() {
       const data = [
         {
-          value: 310,
+          value: this.props.totalStatuses,
           color:"#F7464A",
           highlight: "#FF5A5E",
           label: "statuses"
         },
         {
-          value: 100,
+          value: this.props.totalReplies,
           color: "#46BFBD",
           highlight: "#5AD3D1",
           label: "replies"
         },
         {
-          value: 20,
+          value: this.props.totalRetweets,
           color: "#FDB45C",
           highlight: "#FFC870",
           label: "retweets"
@@ -49,16 +54,16 @@ class TweetStats extends Component {
 
           <Paper zDepth={1} style={{paddingBottom: '20px'}}>
             <AppBar
-              title="search results for &#8220;yow&#8221;"
+              title="search results"
               style={{marginBottom: '20px'}}
             />
 
             <div className="tweet-stats-heading text-center">
-              <h1>245 FOUND</h1>
+              <h1>{this.props.totalTweets} FOUND</h1>
             </div>
             <div className="pie-chart-container text-center">
 
-              <PieChart data={data} />
+              <PieChart data={data} redraw/>
             </div>
             <Divider />
 

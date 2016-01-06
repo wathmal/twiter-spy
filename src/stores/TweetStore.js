@@ -13,6 +13,10 @@ let _searchText= '';
 let _fromDate = null;
 let _toDate= null;
 let _pageNo = 0;
+let _totalTweets = 0;
+let _totalStatuses = 0;
+let _totalReplies = 0;
+let _totalRetweets = 0;
 /*
  * imagine these as setters for store only accessible by the store
  * */
@@ -34,6 +38,22 @@ function setFromDate(date) {
 
 function setToDate(date) {
   _toDate = date;
+}
+
+function setTotalTweets(date) {
+  _totalTweets = date;
+}
+
+function setTotalStatuses(date) {
+  _totalStatuses = date.status_count.doc_count;
+}
+
+function setTotalReplies(date) {
+  _totalReplies = date.reply_count.doc_count;
+}
+
+function setTotalRetweets(date) {
+  _totalRetweets = date.retweet_count.doc_count;
 }
 
 class TweetStore extends EventEmitter {
@@ -61,6 +81,22 @@ class TweetStore extends EventEmitter {
 
   getToDate() {
     return _toDate;
+  }
+
+  getTotalTweets() {
+    return _totalTweets;
+  }
+
+  getTotalStatuses() {
+    return _totalStatuses;
+  }
+
+  getTotalReplies() {
+    return _totalReplies;
+  }
+
+  getTotalRetweets() {
+    return _totalRetweets;
   }
 
   emitChange() {
@@ -108,6 +144,13 @@ tweetStore.dispatchToken = AppDispatcher.register(function(payload) {
 
   case AppConstants.SET_TO_DATE:
     setToDate(action.data);
+    tweetStore.emitChange();
+    break;
+  case AppConstants.TWEET_STATS:
+    setTotalTweets(action.total_data);
+    setTotalStatuses(action.stat_data);
+    setTotalReplies(action.stat_data);
+    setTotalRetweets(action.stat_data);
     tweetStore.emitChange();
     break;
   default:

@@ -8,4 +8,5 @@ export default keyMirror({
   SET_FROM_DATE: null,
   SET_TO_DATE: null,
   SET_PAGE_NO: null,
+  TWEET_STATS: null,
 });
